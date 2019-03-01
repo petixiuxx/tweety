@@ -7,6 +7,8 @@ import {
   Dimensions
 } from "react-native";
 import { Input, Button } from "react-native-elements";
+import PropTypes from "prop-types";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -16,6 +18,11 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const BG_IMAGE = require("../../../assets/images/bg_screen2.jpg");
 
 export default class SignUp extends Component {
+  static navigationOptions = {
+    title: "Sign Up",
+    header: null
+  };
+
   constructor(props) {
     super(props);
 
@@ -40,12 +47,14 @@ export default class SignUp extends Component {
     return re.test(email);
   }
 
-  submitLoginCredentials() {
+  async submitLoginCredentials() {
     const { showLoading } = this.state;
 
     this.setState({
       showLoading: !showLoading
     });
+    await AsyncStorage.setItem("userToken", "test");
+    this.props.navigation.navigate("Home");
   }
 
   render() {
@@ -179,7 +188,7 @@ export default class SignUp extends Component {
                   activeOpacity={0.5}
                   titleStyle={{ color: "white", fontSize: 15 }}
                   containerStyle={{ marginTop: -10 }}
-                  onPress={() => console.log("Account created")}
+                  onPress={() => this.props.navigation.navigate("Login")}
                 />
               </View>
             </View>
@@ -238,3 +247,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+SignUp.propTypes = {
+  navigation: PropTypes.object
+};

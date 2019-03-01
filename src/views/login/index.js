@@ -7,6 +7,7 @@ import {
   Dimensions
 } from "react-native";
 import { Input, Button } from "react-native-elements";
+import PropTypes from "prop-types";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -16,6 +17,11 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const BG_IMAGE = require("../../../assets/images/bg_screen1.jpg");
 
 export default class Login extends Component {
+  static navigationOptions = {
+    title: "Sign In",
+    header: null
+  };
+
   constructor(props) {
     super(props);
 
@@ -147,7 +153,7 @@ export default class Login extends Component {
                   activeOpacity={0.5}
                   titleStyle={{ color: "white", fontSize: 15 }}
                   containerStyle={{ marginTop: -10 }}
-                  onPress={() => console.log("Account created")}
+                  onPress={() => this.props.navigation.navigate("SignUp")}
                 />
               </View>
             </View>
@@ -206,3 +212,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+Login.propTypes = {
+  navigation: PropTypes.object
+};
