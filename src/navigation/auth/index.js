@@ -5,10 +5,18 @@ import Login from "../../views/login";
 const AuthStack = createStackNavigator(
   {
     SignUp: {
-      screen: SignUp
+      screen: SignUp,
+      navigationOptions: ({ navigation }) => ({
+        title: "Sign Up",
+        header: null
+      })
     },
     Login: {
-      screen: Login
+      screen: Login,
+      navigationOptions: ({ navigation }) => ({
+        title: "Sign In",
+        header: null
+      })
     }
   },
   {
